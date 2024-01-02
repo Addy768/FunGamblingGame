@@ -2,7 +2,7 @@ import random
 MAX_LINES=3 # constant value that will not change
 MAX_BET=100
 MIN_BET=1
-ROWN=3
+ROWS=3
 COLS=3
 count_for_symbol={
     "A":2,
@@ -23,10 +23,26 @@ def get_slot_machine_spinning(rows,cols,symbols):
         for row in range(rows):
             value=random.choice(current_symbols)
             current_symbols.remove(value)
-            columns.append(value)
-        columns.append(column)
+            column.append(value)  # Fix: Append the value to the column, not columns
+        columns.append(column)  # Fix: Append the column to columns
     return columns
 
+def printing_slot_machine(columns):
+    # [A,B,C]
+    # [A,B,C]
+    # [A,B,C]
+    #doing something like above maybe??
+    for row in range(len(columns[0])):#for every single loopi we loop for every single row this essentially transposes our columns
+        for i,column in enumerate(columns):
+            if i != len(columns)-1:
+                print(column[row],end="|")
+            else:
+                print(column[row],end="")
+        print()
+                
+            
+
+    
 def deposit():
     ## se we wrote a function deposit  here we ask what is the amount then wwe wcheck if the amount is digit then we will convert it into the int 
     #then we put the conditions for greater than 0 or lesss than 0
@@ -88,6 +104,8 @@ def main():
         else:
             break    
     print(f"you are betting on ${bet} on ${lines} lines. total bet is equal to: $ ${total_bet}")
+    slots=get_slot_machine_spinning (ROWS,COLS,count_for_symbol)
+    printing_slot_machine(slots)
     
 
 main()    
