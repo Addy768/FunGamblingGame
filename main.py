@@ -1,7 +1,31 @@
-
+import random
 MAX_LINES=3 # constant value that will not change
 MAX_BET=100
 MIN_BET=1
+ROWN=3
+COLS=3
+count_for_symbol={
+    "A":2,
+    "B":4,
+    "C":6,
+    "D":8
+}
+def get_slot_machine_spinning(rows,cols,symbols):
+    all_symbols=[]
+    for symbol,count_for_symbol in symbols.items():
+        for _ in range(count_for_symbol):
+            all_symbols.append(symbol)
+    columns=[]
+    
+    for col in range(cols):
+        column=[]
+        current_symbols=all_symbols[:]# copying
+        for row in range(rows):
+            value=random.choice(current_symbols)
+            current_symbols.remove(value)
+            columns.append(value)
+        columns.append(column)
+    return columns
 
 def deposit():
     ## se we wrote a function deposit  here we ask what is the amount then wwe wcheck if the amount is digit then we will convert it into the int 
@@ -60,7 +84,9 @@ def main():
         total_bet= bet * lines
         
         if total_bet>balance:
-            print("you do not have anough to bet on ")
+            print(f"you do not have anough to bet that amount, your current balance is : ${balance}  ")
+        else:
+            break    
     print(f"you are betting on ${bet} on ${lines} lines. total bet is equal to: $ ${total_bet}")
     
 
